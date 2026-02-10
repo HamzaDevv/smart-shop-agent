@@ -83,11 +83,3 @@ def web_search_tool(query: str) -> dict:
         answer["content"] = f"WEB_ERROR::{e}"
         answer["source_url"] = []
         return answer
-
-
-if __name__ == "__main__":
-    result = rag_search_tool.invoke(
-        "my laptop specification which I bought from Flipkart"
-    )
-    for key, value in result.items():
-        print(f"{key}: {value}")

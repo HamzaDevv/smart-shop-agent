@@ -1,11 +1,25 @@
-docling
-python-dotenv
-langchain-google-genai
-langchain-ollama
-langchain_groq
+# Core AI
 langchain
-langchain_community
+langchain-community
+langchain-google-genai
+langchain-groq
+langchain-ollama
+langchain-tavily
 langgraph
-langchain_tavily
-psycopg2
+
+# Document Processing
+docling
+pdfplumber
+semantic-chunker
+
+# Database
+psycopg2-binary
+
+# Web Framework
 streamlit
+fastapi
+uvicorn
+
+# Utilities
+python-dotenv
+watchdog

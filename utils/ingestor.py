@@ -98,9 +98,11 @@ You will be given an image of a **handwritten Indian invoice**. Your task is to 
 
 
 if __name__ == "__main__":
-    input_file = "/Users/hamza/Developer/Imp_Projects/smart_shop/documents/WhatsApp Image 2025-06-17 at 8.16.58 PM.jpeg"  # or "image1.jpeg"
+    input_file = "/Users/hamza/Developer/Imp_Projects/smart_shop_ai/documents/laptop_bill.pdf"  # or "image1.jpeg"
     ingestor = RobustIngestor(input_file=input_file)
     text = ingestor.run()
+    with open("example.txt", "w") as file:
+        file.write(text)
 
 
 # {

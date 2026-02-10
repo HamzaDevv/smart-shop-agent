@@ -1,5 +1,6 @@
 import os
 from datetime import date
+from dotenv import load_dotenv
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import (
@@ -13,8 +14,12 @@ from sqlalchemy import (
     Date,
 )
 
+load_dotenv()
+
 # --- DB Config ---
-DATABASE_URL = "postgresql://postgres:hamza@localhost:5432/smartinventory"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL", "postgresql://postgres:password@localhost:5432/smartinventory"
+)
 engine = create_engine(DATABASE_URL)
 
 
