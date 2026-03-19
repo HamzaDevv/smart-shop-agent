@@ -23,3 +23,5 @@ uvicorn
 # Utilities
 python-dotenv
 watchdog
+ipython
+ipykernel

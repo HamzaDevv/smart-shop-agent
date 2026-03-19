@@ -1,0 +1,17 @@
+__pycache__
+*.pyc
+.git
+.env
+.env.docker
+.DS_Store
+*.egg-info
+DukaanSahaayak-client/node_modules
+DukaanSahaayak-client/dist
+BillDeck-backend
+documents
+document2
+uv.lock
+*.png
+*.txt
+!requirements.txt
+!table_schema.txt
