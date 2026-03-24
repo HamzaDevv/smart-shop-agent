@@ -92,91 +92,60 @@ Before you begin, make sure you have:
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Setup Instructions (Direct/Manual)
 
-### 1. Clone the Repository
+Follow these steps to run the entire suite locally without Docker.
 
-```bash
-git clone https://github.com/<your-username>/smart-shop-ai.git
-cd smart-shop-ai
-```
-
-### 2. Create a Virtual Environment
-
-```bash
-python -m venv .venv
-source .venv/bin/activate        # macOS / Linux
-# .venv\Scripts\activate         # Windows
-```
-
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Set Up PostgreSQL
-
+### 1. Database Setup
 You need **two databases**: one for business data and one for document vectors.
-
 ```bash
-# Connect to PostgreSQL
 psql -U postgres
-
-# Create databases
 CREATE DATABASE smartinventory;
 CREATE DATABASE vector_db;
-
-# Enable pgvector extension in the vector database
 \c vector_db
 CREATE EXTENSION IF NOT EXISTS vector;
-
 \q
 ```
 
-### 5. Configure Environment Variables
-
+### 2. AI Backend Setup (Root)
 ```bash
+cd smart-shop-agent
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env  # Fill in API keys
+python synthetic_Data/data_filling.py  # Seed test data
+uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+### 3. BillDeck Backend Setup
+```bash
+cd BillDeck-backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 4. React Frontend Setup
+```bash
+cd DukaanSahaayak-client
+npm install
 cp .env.example .env
+npm run dev
 ```
-
-Open `.env` and fill in your values:
-
-```env
-GOOGLE_API_KEY="your-actual-google-api-key"
-GROQ_API_KEY="your-actual-groq-api-key"          # optional
-TAVILY_API_KEY="your-actual-tavily-api-key"
-DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/smartinventory"
-V_DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/vector_db"
-```
-
-### 6. Seed the Database with Sample Data
-
-```bash
-python synthetic_Data/data_filling.py
-```
-
-This creates sample tables (customers, products, sales, vendors, etc.) with test data.
+Access the app at **http://localhost:3000**.
 
 ---
 
-## ▶️ Running the App
+## 🐳 Docker Setup (Alternative)
 
-### Option A: Streamlit UI (Recommended)
-
-```bash
-streamlit run app.py
-```
-
-Open **http://localhost:8501** in your browser.
-
-### Option B: FastAPI Server
+If you prefer Docker, you can start everything with a single command:
 
 ```bash
-uvicorn main:app --reload
+docker compose up --build
 ```
-
-API available at **http://localhost:8000** — docs at `/docs`.
+Access the app at **http://localhost:3000**.
 
 ---
 
